@@ -35,4 +35,12 @@
         android:text="版本号:1.0"
         android:textColor="#A2A2A2"
         android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="31702160136-杨鸿燊"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="62dp"/>
 </RelativeLayout>

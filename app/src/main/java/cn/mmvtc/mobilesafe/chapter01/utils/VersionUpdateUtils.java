@@ -143,6 +143,7 @@ public class VersionUpdateUtils {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         initProgressDialog();
+                        Log.d("xx","xxx");
                         downloadNewApk(versionEntity.apkurl);
                     }
                 });
