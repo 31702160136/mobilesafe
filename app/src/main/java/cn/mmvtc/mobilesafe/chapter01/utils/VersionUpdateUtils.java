@@ -1,33 +1,35 @@
 package cn.mmvtc.mobilesafe.chapter01.utils;
 
-        import java.io.File;
-        import java.io.IOException;
-
-        import org.apache.http.HttpEntity;
-        import org.apache.http.HttpResponse;
-        import org.apache.http.client.ClientProtocolException;
-        import org.apache.http.client.HttpClient;
-        import org.apache.http.client.methods.HttpGet;
-        import org.apache.http.impl.client.DefaultHttpClient;
-        import org.apache.http.params.HttpConnectionParams;
-        import org.apache.http.util.EntityUtils;
-        import org.json.JSONException;
-        import org.json.JSONObject;
-
-        import com.lidroid.xutils.exception.HttpException;
-        import com.lidroid.xutils.http.ResponseInfo;
-
         import android.app.Activity;
-        import android.app.AlertDialog;
-        import android.app.AlertDialog.Builder;
-        import android.app.ProgressDialog;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.os.Handler;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
+        import android.util.Log;
         import android.widget.Toast;
-        import cn.mmvtc.mobilesafe.HomeActivity;
-        import cn.mmvtc.mobilesafe.R;
-        import cn.mmvtc.mobilesafe.chapter01.entity.VersionEntity;
+
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+
+import cn.mmvtc.mobilesafe.HomeActivity;
+import cn.mmvtc.mobilesafe.R;
+import cn.mmvtc.mobilesafe.chapter01.entity.VersionEntity;
 
 /** 更新提醒工具类 */
 public class VersionUpdateUtils {
@@ -41,15 +43,15 @@ public class VersionUpdateUtils {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case MESSAGE_IO_EEOR:
-                    Toast.makeText(context, "IO异常", 0).show();
+                    Toast.makeText(context, "IO异常", Toast.LENGTH_SHORT).show();
                     enterHome();
                     break;
                 case MESSAGE_JSON_EEOR:
-                    Toast.makeText(context, "JSON解析异常", 0).show();
+                    Toast.makeText(context, "JSON解析异常", Toast.LENGTH_SHORT).show();
                     enterHome();
                     break;
                 case MESSAGE_NET_EEOR:
-                    Toast.makeText(context, "网络异常", 0).show();
+                    Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
                     enterHome();
                     break;
                 case MESSAGE_SHOEW_DIALOG:
@@ -73,22 +75,26 @@ public class VersionUpdateUtils {
     public VersionUpdateUtils(String Version,Activity activity) {
         mVersion = Version;
         context = activity;
+
     }
 
     /**
      * 获取服务器版本号
      */
     public void getCloudVersion(){
+
         try {
             HttpClient client = new DefaultHttpClient();
 		  /*连接超时*/
             HttpConnectionParams.setConnectionTimeout(client.getParams(), 5000);
         /*请求超时*/
             HttpConnectionParams.setSoTimeout(client.getParams(), 5000);
+
             HttpGet httpGet = new HttpGet(
-                    "http://172.16.25.14:8080/updateinfo.html");
+                    "https://yulemofang.cn/shangke/updateinfo.html");
             HttpResponse execute = client.execute(httpGet);
             if (execute.getStatusLine().getStatusCode() == 200) {
+
                 // 请求和响应都成功了
                 HttpEntity entity = execute.getEntity();
                 String result = EntityUtils.toString(entity, "gbk");
@@ -101,6 +107,7 @@ public class VersionUpdateUtils {
                 versionEntity.description = des;
                 String apkurl = jsonObject.getString("apkurl");
                 versionEntity.apkurl = apkurl;
+                Log.d("ddddd","dddd");
                 if (!mVersion.equals(versionEntity.versioncode)) {
                     // 版本号不一致
                     handler.sendEmptyMessage(MESSAGE_SHOEW_DIALOG);
@@ -129,7 +136,7 @@ public class VersionUpdateUtils {
         builder.setTitle("检查到新版本：" + versionEntity.versioncode);// 设置标题
         builder.setMessage(versionEntity.description);// 根据服务器返回描述,设置升级描述信息
         builder.setCancelable(false);// 设置不能点击手机返回按钮隐藏对话框
-        builder.setIcon(R.drawable.ic_launcher);// 设置对话框图标
+        builder.setIcon(R.drawable.icon);// 设置对话框图标
         // 设置立即升级按钮点击事件
         builder.setPositiveButton("立即升级",
                 new DialogInterface.OnClickListener() {
