@@ -107,7 +107,6 @@ public class VersionUpdateUtils {
                 versionEntity.description = des;
                 String apkurl = jsonObject.getString("apkurl");
                 versionEntity.apkurl = apkurl;
-                Log.d("ddddd","dddd");
                 if (!mVersion.equals(versionEntity.versioncode)) {
                     // 版本号不一致
                     handler.sendEmptyMessage(MESSAGE_SHOEW_DIALOG);
