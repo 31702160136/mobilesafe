@@ -19,6 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".chapter02.dialog.LostFindActivity">
+        </activity>
     </application>
 
 </manifest>
