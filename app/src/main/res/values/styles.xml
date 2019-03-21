@@ -5,8 +5,9 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="dialog_custom" parent="android:style/Theme.Dialog">
-        <item name="androidwindowFrame">@null</item>
-        <item name="windorNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 </resources>
