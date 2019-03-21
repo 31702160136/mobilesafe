@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="30dp"
-            android:text="主人，我是杀毒的"
+            android:text="@string/ren"
             android:textColor="#90000000"
             android:scaleX="1.1"
             android:textSize="16sp"/>

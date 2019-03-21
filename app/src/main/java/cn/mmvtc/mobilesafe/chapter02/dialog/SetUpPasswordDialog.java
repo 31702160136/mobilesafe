@@ -18,7 +18,6 @@ public class SetUpPasswordDialog extends Dialog implements View.OnClickListener{
     public EditText mFirstPWDET;//第一次密码输入
     public EditText mAffirmET;//再次输入密码
     private MyCallBack myCallBack;
-
     public SetUpPasswordDialog(Context context) {
         super(context,R.style.dialog_custom);//引入自定义对话框的样式
     }
@@ -28,8 +27,8 @@ public class SetUpPasswordDialog extends Dialog implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.set_up_password_dialog);
+        super.onCreate(savedInstanceState);
         //初始化控件
         initView();
     }
